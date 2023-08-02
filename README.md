@@ -1,7 +1,7 @@
 # Description
 - This repo contains source code to perform initial image acquisition using Mako G-040 Camera from Allied Vision.
 - It saves the captured images inside the 'images' folder.
-- The timestamps are saved inside the 'timestamp' folder.
+- The timestamps are saved inside the 'timestamps' folder.
 
 # Steps to follow
 ```
