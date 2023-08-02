@@ -28,8 +28,6 @@ int main()
     VmbUchar_t *pImage = nullptr;
     double exposureTime, gain, blackLvl, gamma, frame_rate, frame_rate_limit;
     const int ENTER_KEY_CODE = 13;
-
-    cv::TickMeter tm;
     
     err = system.Startup();
     if (err != VmbErrorSuccess)
