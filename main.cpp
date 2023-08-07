@@ -26,7 +26,7 @@ int main()
     VmbUint32_t t_out = 50; // timeout in miliseconds to allow frame to be filled
     VmbUint64_t time_stamp;
     VmbUchar_t *pImage = nullptr;
-    double exposureTime, gain, blackLvl, gamma, frame_rate, frame_rate_limit;
+    double exposure_time, gain, blackLvl, gamma, frame_rate, frame_rate_limit;
     const int ENTER_KEY_CODE = 13;
     
     err = system.Startup();
@@ -61,21 +61,45 @@ int main()
     std::cout << "\n///////////////////////////////\n"
               << "//// Printing general info ////\n"
               << "///////////////////////////////\n" <<std::endl;
+
+    // Get Exposure Time          
     cameras[0]->GetFeatureByName("ExposureTimeAbs", feature);
-    feature->GetValue(exposureTime);
-    std::cout << "/// Exposure Time     :        " << exposureTime << " us" << std::endl;
+    feature->GetValue(exposure_time);
+    std::cout << "/// Exposure Time (Before)        :        " << exposure_time << " us" << std::endl;
+
+    // Set Exposure Time
+    exposure_time = 540.0; // in microseconds
+    cameras[0]->GetFeatureByName("ExposureTimeAbs", feature);
+    feature->SetValue(exposure_time);
+    std::cout << "/// Exposure Time (After)         :        " << exposure_time << " us" << std::endl;
+
+    // Get Gain
     cameras[0]->GetFeatureByName("Gain", feature);
     feature->GetValue( gain );
-    std::cout << "/// Gain              :        " << gain << std::endl;
+    std::cout << "/// Gain (Before)                 :        " << gain << std::endl;
+
+    // Set Gain
+    gain = 0.0;
+    cameras[0]->GetFeatureByName("Gain", feature);
+    feature->SetValue(gain);
+    std::cout << "/// Gain (After)                  :        " << gain << std::endl;
+
+    // Get Black Level
     cameras[0]->GetFeatureByName("BlackLevel", feature);
     feature->GetValue(blackLvl);
     std::cout << "/// Black Level       :        " << blackLvl << std::endl;
+
+    // Get Gamma
     cameras[0]->GetFeatureByName("Gamma", feature);
     feature->GetValue(gamma);
     std::cout << "/// Gamma             :        " << gamma << std::endl;
+
+    // Get current frame rate
     cameras[0]->GetFeatureByName("AcquisitionFrameRateAbs", feature);
     feature->GetValue(frame_rate);
     std::cout << "/// Frame Rate        :        " << frame_rate << " fps" << std::endl;
+
+    // Get max. possible frame rate
     cameras[0]->GetFeatureByName("AcquisitionFrameRateLimit", feature);
     feature->GetValue(frame_rate_limit);
     std::cout << "/// Frame Rate Limit  :        " << frame_rate_limit << " fps" << std::endl;
@@ -86,14 +110,14 @@ int main()
     std::string root_path = "../images";
     create_folders(root_path); // Create root folder
     
-    std::string folder_path = root_path + "/" + "Gain_" + std::to_string(int(gain)) + "_Exposure_" + std::to_string(int(exposureTime));
+    std::string folder_path = root_path + "/" + "Gain_" + std::to_string(int(gain)) + "_Exposure_" + std::to_string(int(exposure_time)) + "_Exp_6";
     create_folders(folder_path);
     
     std::string timestamp_folder = "../timestamps";
     create_folders(timestamp_folder);
 
     std::string file_path, xlsx_path;
-    xlsx_path = timestamp_folder + "/" + "Gain_" + std::to_string(int(gain)) + "_Exposure_" + std::to_string(int(exposureTime)) + ".xlsx";
+    xlsx_path = timestamp_folder + "/" + "Gain_" + std::to_string(int(gain)) + "_Exposure_" + std::to_string(int(exposure_time)) + ".xlsx";
     int frame_count = 0;
 
     lxw_workbook *workbook = workbook_new(xlsx_path.c_str());
