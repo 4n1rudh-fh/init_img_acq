@@ -35,7 +35,7 @@ make -j
 # Troubleshooting for Camera API
   ```
   # Ping the camera IP address
-  ping 169.254.112.59
+  ping <camera_ip_address>
 
   # Run VimbaXViewer
   cd lib/VimbaX_2023-1/bin
