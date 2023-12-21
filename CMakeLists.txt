@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.16.3)
+project(init_img_acq)
 find_package(OpenCV REQUIRED)
 find_package(ZLIB REQUIRED)
 set(VIMBAX_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/VimbaX_2023-1)

@@ -1,17 +1,50 @@
 # Description
-- This repo contains source code to perform initial image acquisition using Mako G-040 Camera from Allied Vision.
+- This repo contains source code to perform initial image acquisition.
 - It saves the captured images inside the 'images' folder.
 - The timestamps are saved inside the 'timestamps' folder.
 
-# Steps to follow
-```
-# create build and lib directory inside the repo folder
-mkdir -p build lib
+# Installation
+- Go to project directory and create folders `lib` and `build`:
+  ```
+  cd <your_path>/init_img_acq
+  mkdir -p build lib
+  ```
 
+- VimbaX Library
+  - Download the `VmbCPP` library `VimbaX_Setup-2023-1-Linux64.tar.gz` from [here](https://www.alliedvision.com/en/products/software/vimba-x-sdk/).
+  - Extract the contents of tar file: `tar -xvzf <your_download_path>/VimbaX_Setup-2023-1-Linux64.tar.gz`
+  - Paste the extracted directory inside the `lib` folder.
+
+- Install ZLIB: `sudo apt install zlib1g-dev`
+- Install LibXLSXWriter from instructions [here](https://libxlsxwriter.github.io/getting_started.html). Make it on your own from given instructions inside your `lib` directory. 
+
+# Build
+```
+# Go to build folder
+cd build
+
+# Generate makefiles
+cmake -s ..
+
+make -j
+
+# Run the executable
+./init_img_acq
 ```
 
-# To-Do
-- Add instructions for ZLIB 
-- Add instructions for VimbaCPP
-- Add instructions for XLSXWRITER
-- Or just make a new folder where you tell the user to copy the libraries from. But ZLIB and OpenCV instructions are still necessary.
+# Troubleshooting for Camera API
+  ```
+  # Ping the camera IP address
+  ping 169.254.112.59
+
+  # Run VimbaXViewer
+  cd lib/VimbaX_2023-1/bin
+  ./VimbaXViewer
+  
+  # If TL (Transport Layer) not found
+  cd ../cti
+  sudo -E ./SetGenTLPath.sh
+  sudo -E ./VimbaGigETL_Install.sh
+
+  # Log off your system and run VimbaXViewer again after restart
+  ```

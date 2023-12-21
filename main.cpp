@@ -121,7 +121,7 @@ int main()
     create_folders(root_path); // Create root folder
     
     std::string folder_path = root_path + "/" + "Gain_" + std::to_string(int(gain)) + "_Exposure_" + std::to_string(int(exposure_time));
-    create_folders(folder_path); // Crete folder for the given exposure time and gain
+    create_folders(folder_path); // Create folder for the given exposure time and gain
     
     std::string timestamp_folder = "../timestamps";
     create_folders(timestamp_folder); // Create a timestamp folder
